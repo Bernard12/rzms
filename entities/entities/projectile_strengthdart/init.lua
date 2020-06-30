@@ -27,7 +27,6 @@ function ENT:Hit(vHitPos, vHitNormal, eHitEntity, vOldVelocity)
 			strstatus.Applier = owner
 
 			local targetStatus = owner:GiveStatus("targetbuff", duration)
-			targetStatus.Applier = owner
 
 			local txt = alt and "Defence Shot Gun" or "Strength Shot Gun"
 
