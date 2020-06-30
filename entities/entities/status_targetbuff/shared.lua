@@ -9,11 +9,6 @@ function ENT:PlayerSet()
 	local currentTime = CurTime()
 	self:SetStartTime(currentTime)
 	self:SetEndTime(currentTime + self:GetDuration())
-
-	print("Entity player set:")
-	print(self:GetStartTime())
-	print(self:GetDuration())
-	print(self:GetEndTime())	
 end
 
 function ENT:Initialize()
