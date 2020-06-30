@@ -118,13 +118,6 @@ local statusdisplays = {
 	ValFunc = statusValueFunction("renegade"),
 	Max = 14,
 	Icon = Material("zombiesurvival/headshot_stacks.png")
-},
-{
-	Color = Color(221, 147, 77),
-	Name = "Target1!",
-	ValFunc = statusValueFunction("targetbuff"),
-	Max = 10,
-	Icon = Material("zombiesurvival/speed_up.png")
 }
 }
 

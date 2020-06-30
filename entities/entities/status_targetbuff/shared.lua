@@ -18,7 +18,6 @@ end
 
 function ENT:Initialize()
 	self.BaseClass.Initialize(self)
-	print("HUI PIZDA INIT")
 	if SERVER then
 		hook.Add("EntityTakeDamage", self, self.EntityTakeDamage)
 	end
