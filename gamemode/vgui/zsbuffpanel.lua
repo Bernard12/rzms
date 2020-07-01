@@ -2,7 +2,7 @@ local PANEL = {}
 
 function PANEL:Init()
     local width = BetterScreenScale() * 300
-    local height = BetterScreenScale() * 15
+    local height = BetterScreenScale() * 35
     self:SetWide(width)
     self:SetTall(height)
     
@@ -23,14 +23,18 @@ function PANEL:Paint(w, h)
         local remainingTime = duration  - (CurTime() - startTime)
         local partition = math.Clamp(remainingTime / duration, 0, 1)
         local patientName = lp:GetPatient():Name()
+        local screenscale = BetterScreenScale()
 
-        local w = self:GetWide()
-        local h = self:GetTall()
+        local indicatorWidth = self:GetWide()
+        local indicatorHeight = screenscale * 15
+        local text = "Buff time for " .. patientName
 
+        draw.SimpleTextBlurry(text, "ZSHUDFontTiny", screenscale * 75, 0, COLOR_WHITE, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
         surface.SetDrawColor(0, 0, 0, 230)
-        surface.DrawRect(0, 0, w, h)
+        surface.DrawRect(0, self:GetTall() - indicatorHeight, indicatorWidth, indicatorHeight)
+
         surface.SetDrawColor(214, 158, 27, 255)
-        surface.DrawRect(1, 1, partition * (w - 2), h - 2)
+        surface.DrawRect(1, self:GetTall() - indicatorHeight + 1, partition * (indicatorWidth - 2), indicatorHeight - 2)
     end
 
     return true
