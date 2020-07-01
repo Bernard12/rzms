@@ -33,11 +33,25 @@ function PANEL:Paint(w, h)
         surface.SetDrawColor(0, 0, 0, 230)
         surface.DrawRect(0, self:GetTall() - indicatorHeight, indicatorWidth, indicatorHeight)
 
-        surface.SetDrawColor(214, 158, 27, 255)
+        local color = GetCorrectColor(lp:GetPatientStatusColorId())
+        surface.SetDrawColor(color)
         surface.DrawRect(1, self:GetTall() - indicatorHeight + 1, partition * (indicatorWidth - 2), indicatorHeight - 2)
     end
 
     return true
+end
+
+function GetCorrectColor(colorId)
+    if colorId == PATIENT_COLOR_GRAY then
+        return COLOR_GRAY
+    elseif colorId == PATIENT_COLOR_RED then
+        -- Need separate constants for these
+        return Color(200, 100, 90)
+    elseif colorId == PATIENT_COLOR_BLUE then
+        -- Need separate constants for these
+        return Color(90, 120, 220)
+    end
+    return COLOR_TAN
 end
 
 vgui.Register("ZSBuffPanel", PANEL, "Panel")

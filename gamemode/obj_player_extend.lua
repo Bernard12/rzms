@@ -1016,3 +1016,7 @@ end
 function meta:GetPatientStatusDuration()
 	return self:GetDTFloat(DT_PLAYER_FLOAT_PATIENT_DURATION)
 end
+
+function meta:GetPatientStatusColorId()
+	return self:GetDTInt(DT_PLAYER_INT_PATIENT_COLOR_ID)
+end

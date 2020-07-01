@@ -1764,8 +1764,9 @@ function meta:BarricadeExpertPrecedence(otherpl)
 	return -1
 end
 
-function meta:SetPatient(ent, duration)
+function meta:SetPatient(ent, duration, color)
 	self:SetDTEntity(DT_PLAYER_ENT_PATIENT, ent)
 	self:SetDTFloat(DT_PLAYER_FLOAT_PATIENT_START_TIME, CurTime())
 	self:SetDTFloat(DT_PLAYER_FLOAT_PATIENT_DURATION, duration)
+	self:SetDTInt(DT_PLAYER_INT_PATIENT_COLOR_ID, color)
 end
