@@ -11,12 +11,21 @@ end
 
 function PANEL:Paint(w, h)
     local lp = MySelf
-    local targetbuff = lp:GetStatus("targetbuff")
+    if not lp:IsValid() and lp:Team() ~= TEAM_HUMAN then
+        return
+    end
 
-    if lp:IsValid() and lp:Team() == TEAM_HUMAN and targetbuff then
-        local remainingTime = targetbuff:GetEndTime() - CurTime()
-        local duration = targetbuff:GetDuration()
+    local startTime = lp:GetPatientStatusStartTime()
+    local duration = lp:GetPatientStatusDuration()
+    local isStatusNotExpired = CurTime() - startTime < duration
+
+    if startTime and duration and isStatusNotExpired then
+        local remainingTime = duration  - (CurTime() - startTime)
         local partition = math.Clamp(remainingTime / duration, 0, 1)
+        local patientName = lp:GetPatient():Name()
+
+        local w = self:GetWide()
+        local h = self:GetTall()
 
         surface.SetDrawColor(0, 0, 0, 230)
         surface.DrawRect(0, 0, w, h)

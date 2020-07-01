@@ -1004,3 +1004,15 @@ end
 function meta:GetPhantomHealth()
 	return self:GetDTFloat(DT_PLAYER_FLOAT_PHANTOMHEALTH)
 end
+
+function meta:GetPatient()
+	return self:GetDTEntity(DT_PLAYER_ENT_PATIENT)
+end
+
+function meta:GetPatientStatusStartTime()
+	return self:GetDTFloat(DT_PLAYER_FLOAT_PATIENT_START_TIME)
+end
+
+function meta:GetPatientStatusDuration()
+	return self:GetDTFloat(DT_PLAYER_FLOAT_PATIENT_DURATION)
+end
