@@ -1477,7 +1477,6 @@ function GM:CreateLateVGUI()
 	end
 
 	if not self.BUFF then
-		print("Creating buff panel")
 		self.BUFF = vgui.Create("ZSBuffPanel");
 	end
 end
