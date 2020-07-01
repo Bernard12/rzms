@@ -22,8 +22,11 @@ function ENT:Hit(vHitPos, vHitNormal, eHitEntity, vOldVelocity)
 		self:AttachToPlayer(vHitPos, eHitEntity)
 
 		if eHitEntity:IsPlayer() and eHitEntity:Team() ~= TEAM_UNDEAD then
-			local strstatus = eHitEntity:GiveStatus(alt and "medrifledefboost" or "strengthdartboost", (alt and 2 or 1) * (self.BuffDuration or 10))
+			local duration = (alt and 2 or 1) * (self.BuffDuration or 10)
+			local strstatus = eHitEntity:GiveStatus(alt and "medrifledefboost" or "strengthdartboost", duration)
 			strstatus.Applier = owner
+
+			local targetStatus = owner:GiveStatus("targetbuff", duration)
 
 			local txt = alt and "Defence Shot Gun" or "Strength Shot Gun"
 

@@ -52,6 +52,7 @@ include("vgui/dspawnmenu.lua")
 include("vgui/zsgamestate.lua")
 include("vgui/zshealtharea.lua")
 include("vgui/zsstatusarea.lua")
+include("vgui/zsbuffpanel.lua")
 
 include("cl_dermaskin.lua")
 include("cl_deathnotice.lua")
@@ -1473,6 +1474,11 @@ function GM:CreateLateVGUI()
 		self.XPHUD = vgui.Create("ZSExperienceHUD")
 		self.XPHUD:ParentToHUD()
 		self.XPHUD:InvalidateLayout()
+	end
+
+	if not self.BUFF then
+		print("Creating buff panel")
+		self.BUFF = vgui.Create("ZSBuffPanel");
 	end
 end
 
