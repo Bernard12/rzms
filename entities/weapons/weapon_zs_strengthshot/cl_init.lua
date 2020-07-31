@@ -20,6 +20,13 @@ SWEP.VElements = {
 	["2+"] = { type = "Model", model = "models/airboatgun.mdl", bone = "ValveBiped.Bip01_Spine4", rel = "base", pos = Vector(0, -3, 0), angle = Angle(0, 90, 180), size = Vector(0.25, 0.25, 0.25), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
 }
 
+function SWEP:DrawHUD()
+	self:RenderBuffProgressBar()
+
+	if GetConVar("crosshair"):GetInt() ~= 1 then return end
+	self:DrawCrosshairDot()
+end
+
 function SWEP:Draw2DHUD()
 	BaseClass.Draw2DHUD(self)
 

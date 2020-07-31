@@ -47,8 +47,13 @@ function ENT:Hit(vHitPos, vHitNormal, eHitEntity, vOldVelocity)
 					self:EmitSound("buttons/button8.wav", 70, math.random(115,128))
 					self:DoRefund(owner)
 				elseif not (owner:IsSkillActive(SKILL_RECLAIMSOL) and ehithp >= ehitmaxhp) then
-					local status = eHitEntity:GiveStatus(alt and "strengthdartboost" or "medrifledefboost", (alt and 1 or 2) * (self.BuffDuration or 10))
+					local duration = (alt and 2 or 1) * (self.BuffDuration or 10)
+					local status = eHitEntity:GiveStatus(alt and "strengthdartboost" or "medrifledefboost", duration)
 					status.Applier = owner
+					
+					local gun
+					gun = self:ProjectileDamageSource()
+					gun:SetPatient(owner, duration, alt and PATIENT_COLOR_RED or PATIENT_COLOR_BLUE)
 
 					owner:HealPlayer(eHitEntity, self.Heal)
 

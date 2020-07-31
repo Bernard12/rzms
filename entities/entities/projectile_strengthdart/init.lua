@@ -26,9 +26,11 @@ function ENT:Hit(vHitPos, vHitNormal, eHitEntity, vOldVelocity)
 			local strstatus = eHitEntity:GiveStatus(alt and "medrifledefboost" or "strengthdartboost", duration)
 			strstatus.Applier = owner
 
-			owner:SetPatient(eHitEntity, duration, alt and PATIENT_COLOR_BLUE or PATIENT_COLOR_RED)
-
 			local txt = alt and "Defence Shot Gun" or "Strength Shot Gun"
+
+			local gun
+			gun = self:ProjectileDamageSource()
+			gun:SetPatient(owner, duration, alt and PATIENT_COLOR_BLUE or PATIENT_COLOR_RED)
 
 			net.Start("zs_buffby")
 				net.WriteEntity(owner)

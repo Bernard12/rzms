@@ -52,6 +52,13 @@ function SWEP:GetViewModelPosition(pos, ang)
 	return BaseClass.GetViewModelPosition(self, pos, ang)
 end
 
+function SWEP:DrawHUD()
+	self:RenderBuffProgressBar()
+
+	if GetConVar("crosshair"):GetInt() ~= 1 then return end
+	self:DrawCrosshairDot()
+end
+
 function SWEP:DrawHUDBackground()
 	if GAMEMODE.DisableScopes then return end
 
