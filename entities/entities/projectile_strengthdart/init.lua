@@ -28,9 +28,12 @@ function ENT:Hit(vHitPos, vHitNormal, eHitEntity, vOldVelocity)
 
 			local txt = alt and "Defence Shot Gun" or "Strength Shot Gun"
 
+
 			local gun
 			gun = self:ProjectileDamageSource()
-			gun:SetActivePatient(owner, duration, alt and PATIENT_COLOR_BLUE or PATIENT_COLOR_RED)
+			if NeedToUpdateActivePatient(gun, eHitEntity) then
+				gun:SetActivePatient(owner, duration, alt and PATIENT_COLOR_BLUE or PATIENT_COLOR_RED)
+			end
 
 			net.Start("zs_buffby")
 				net.WriteEntity(owner)
@@ -61,4 +64,17 @@ function ENT:Hit(vHitPos, vHitNormal, eHitEntity, vOldVelocity)
 			effectdata:SetEntity(NULL)
 		end
 	util.Effect(alt and "hit_healdart2" or "hit_strengthdart", effectdata)
+end
+
+function NeedToUpdateActivePatient(gun, eHitEntity)
+	if not gun and not gun.GetSeekedPlayer then
+		return false
+	end
+
+	local seekedTarget = gun:GetSeekedPlayer()
+	if not seekedTarget:IsValid() or seekedTarget ~= eHitEntity then
+		return false
+	end
+
+	return true
 end

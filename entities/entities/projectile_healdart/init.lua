@@ -114,7 +114,9 @@ function ENT:Hit(vHitPos, vHitNormal, eHitEntity, vOldVelocity)
 
 				local gun
 				gun = self:ProjectileDamageSource()
-				gun:SetActivePatient(owner, duration, PATIENT_COLOR_GREEN)
+				if NeedToUpdateActivePatient(gun, eHitEntity) then
+					gun:SetActivePatient(owner, duration, PATIENT_COLOR_GREEN)
+				end
 			else
 				self:DoRefund(owner)
 			end
@@ -144,4 +146,17 @@ function ENT:PhysicsCollide(data, phys)
 	end
 
 	self:NextThink(CurTime())
+end
+
+function NeedToUpdateActivePatient(gun, eHitEntity)
+	if not gun and not gun.GetSeekedPlayer then
+		return false
+	end
+
+	local seekedTarget = gun:GetSeekedPlayer()
+	if not seekedTarget:IsValid() or seekedTarget ~= eHitEntity then
+		return false
+	end
+
+	return true
 end

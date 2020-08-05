@@ -53,7 +53,9 @@ function ENT:Hit(vHitPos, vHitNormal, eHitEntity, vOldVelocity)
 					
 					local gun
 					gun = self:ProjectileDamageSource()
-					gun:SetActivePatient(owner, duration, alt and PATIENT_COLOR_RED or PATIENT_COLOR_BLUE)
+					if NeedToUpdateActivePatient(gun, eHitEntity) then
+						gun:SetActivePatient(owner, duration, alt and PATIENT_COLOR_RED or PATIENT_COLOR_BLUE)
+					end
 
 					owner:HealPlayer(eHitEntity, self.Heal)
 
@@ -90,4 +92,17 @@ function ENT:Hit(vHitPos, vHitNormal, eHitEntity, vOldVelocity)
 			effectdata:SetEntity(NULL)
 		end
 	util.Effect(alt and "hit_strengthdart" or "hit_healdart2", effectdata)
+end
+
+function NeedToUpdateActivePatient(gun, eHitEntity)
+	if not gun and not gun.GetSeekedPlayer then
+		return false
+	end
+
+	local seekedTarget = gun:GetSeekedPlayer()
+	if not seekedTarget:IsValid() or seekedTarget ~= eHitEntity then
+		return false
+	end
+
+	return true
 end
