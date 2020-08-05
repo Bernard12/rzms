@@ -114,7 +114,7 @@ function ENT:Hit(vHitPos, vHitNormal, eHitEntity, vOldVelocity)
 
 				local gun
 				gun = self:ProjectileDamageSource()
-				gun:SetPatient(owner, duration, PATIENT_COLOR_GREEN)
+				gun:SetActivePatient(owner, duration, PATIENT_COLOR_GREEN)
 			else
 				self:DoRefund(owner)
 			end

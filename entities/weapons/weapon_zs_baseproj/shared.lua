@@ -11,7 +11,7 @@ SWEP.ConeMin = 1
 
 SWEP.Primary.ProjVelocity = 1400
 
-function SWEP:SetPatient(ent, duration, color)
+function SWEP:SetActivePatient(ent, duration, color)
 	self:SetDTEntity(DT_BUFF_ENT_PATIENT, ent)
 	self:SetDTFloat(DT_BUFF_FLOAT_PATIENT_START_TIME, CurTime())
 	self:SetDTFloat(DT_BUFF_FLOAT_PATIENT_DURATION, duration)
